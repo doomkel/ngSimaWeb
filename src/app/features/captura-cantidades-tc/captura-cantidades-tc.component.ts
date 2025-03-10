@@ -27,19 +27,13 @@ export class CapturaCantidadesTcComponent implements OnInit {
   rows: RowData[] = [];
 
   selectedColors: string[] = [];
+
+  totalInputVal1: number = 0;
+  totalInputVal2: number = 0;
+  totalInputVal3: number = 0;
+  totalInputVal4: number = 0;
+  totalInputTot: number = 0;
   
-
-  onKey(row: RowData) {
-    const val1 = Number(row.inputVal1);
-    const val2 = Number(row.inputVal2);
-    const val3 = Number(row.inputVal3);
-    const val4 = Number(row.inputVal4);
-
-    const total = val1 + val2 + val3 + val4;
-    row.inputValTot = total.toString();
-
-  }
-
   ngOnInit(): void {
     this.sharedService.currentColor.subscribe(color => {
       if (color) {
@@ -59,6 +53,29 @@ export class CapturaCantidadesTcComponent implements OnInit {
       }
     });
   }
+
+  
+  onKey(row: RowData) {
+    const val1 = Number(row.inputVal1);
+    const val2 = Number(row.inputVal2);
+    const val3 = Number(row.inputVal3);
+    const val4 = Number(row.inputVal4);
+
+    const total = val1 + val2 + val3 + val4;
+    row.inputValTot = total.toString();
+
+    this.calculateTotalInput();
+
+  }
+
+  calculateTotalInput() {
+    this.totalInputVal1 = this.rows.reduce((sum, row) => sum + Number(row.inputVal1), 0);
+    this.totalInputVal2 = this.rows.reduce((sum, row) => sum + Number(row.inputVal2), 0);
+    this.totalInputVal3 = this.rows.reduce((sum, row) => sum + Number(row.inputVal3), 0);
+    this.totalInputVal4 = this.rows.reduce((sum, row) => sum + Number(row.inputVal4), 0);
+    this.totalInputTot = this.rows.reduce((sum, row) => sum + Number(row.inputValTot), 0);
+  }
+
 
  
 }
