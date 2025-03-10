@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { LoginComponent } from './core/login/login.component';
-import { CapturaCantidadesTcComponent } from './features/captura-cantidades-tc/captura-cantidades-tc.component';
 import { LayoutComponent } from './core/layout/layout.component';
-import { TablaCapturaComponent } from './features/tabla-captura/tabla-captura.component';
-import { CapturaEstiloComponent } from './features/captura-estilo/captura-estilo.component';
-import { ConsultaNotasComponent } from './features/consulta-notas/consulta-notas.component';
 import { ConsultaComponent } from './core/consulta/consulta.component';
-import { CapturaColoresComponent } from './features/captura-colores/captura-colores.component';
+import { NotificacionesComponent } from './core/notificaciones/notificaciones.component';
+import { InicioComponent } from './core/inicio/inicio.component';
+import { ConsolidarComponent } from './core/consolidar/consolidar.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route
   {
     path: 'main',
     component: LayoutComponent
@@ -18,18 +16,20 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: 'sidebar',
-    component: SidebarComponent
   },  
-  {
-    path: 'colores',
-    component: CapturaColoresComponent
-  },
   {
     path: 'consulta',
     component: ConsultaComponent
+  },
+  {
+    path: 'notificaciones',
+    component: NotificacionesComponent
+  },
+  { path: 'inicio', 
+    component: InicioComponent 
+  },
+  { path: 'consolidar', 
+    component: ConsolidarComponent
   }
 ];
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-boton-aprobar-nota',
@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./boton-aprobar-nota.component.css']
 })
 export class BotonAprobarNotaComponent {
-
+  @Input() labelTipo: string = 'Prenota:';
+  @Input() labelProceso: string = 'GUARDAR';
 }

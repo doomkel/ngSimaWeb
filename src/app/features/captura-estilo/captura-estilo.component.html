@@ -14,31 +14,54 @@
             <div>
                 <label class="text-white dark:text-gray-200" for="marca">Marca</label>
                 <select class="inline w-full px-1 py-1 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option>DAVINCHY</option>                    
+                    <option *ngFor="let marca of marcas" [value]="marca.idMarca">{{marca.marca}}</option>                    
                 </select>
             </div>
             <div>
                 <label class="text-white dark:text-gray-200" for="familia">Familia</label>
                 <select class="inline w-full px-1 py-1 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option>ABRIGO</option>                    
+                    <option *ngFor="let familia of familias" [value]="familia.idFamilia">{{familia.familia}}</option>                    
                 </select>
             </div>
             <div>
                 <label class="text-white dark:text-gray-200" for="clase">Clase</label>
                 <select class="inline w-full px-1 py-1 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option>BLUSA</option>                    
+                    <option *ngFor="let clase of clases" [value]="clase.idClase">{{clase.clase}}</option>                    
                 </select>
             </div>
             <div>
                 <label class="text-white dark:text-gray-200" for="subfamilia">SubFamilia</label>
                 <select class="inline w-full px-1 py-1 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option></option>                    
+                    <option *ngFor="let subfamilia of subfamilias" [value]="subfamilia.idSubFamilia">{{subfamilia.subfamilia}}</option>                    
                 </select>
             </div>
             <div>
                 <label class="text-white dark:text-gray-200" for="tallaje">Tallaje</label>
                 <select class="inline w-full px-1 py-1 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option>CH,M,G,XG</option>                    
+                    <option>CH-M-G-XG</option>
+                    <option>1X-2X-3X-4X-5X</option>
+                    <option>UNI</option>
+                    <option>CH-M-G</option>
+                    <option>CER-1-3-5-7-9-11-13-15</option>
+                    <option>30-32-34-36-38-40</option>
+                    <option>36-38-40-42-44-46</option>
+                    <option>CH M-M G-G XG</option>
+                    <option>1XL-3XL-3XL</option>
+                    <option>EXCH-CH-M-G-XG</option>
+                    <option>7-8-10-12-14-16</option>
+                    <option>CH-M-G-XG-XXG</option>
+                    <option>EXCH-CH-M-G-XG-XXG</option>
+                    <option>4-6-8-10-12</option>
+                    <option>1X-2X-3X-4X</option>
+                    <option>1X 2X-2X 3X</option>
+                    <option>1X-2X-3X</option>
+                    <option>8-10-12-14</option>
+                    <option>2-3-4-5</option>
+                    <option>4-6-8-10-12-14</option>
+                    <option>4-5-6-8-10-12</option>
+                    <option>M-G-XG</option>
+                    <option>8-10-12</option>
+ 
                 </select>
             </div>            
             <div>
