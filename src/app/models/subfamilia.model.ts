@@ -1,4 +1,6 @@
 export interface SubFamilia {
     idSubFamilia: number;
-    subfamilia: string;
+    subFamilia: string;
+    idFamilia: number;
+    estatus: string;
 }

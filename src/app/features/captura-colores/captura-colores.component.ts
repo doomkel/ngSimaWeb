@@ -33,8 +33,7 @@ export class CapturaColoresComponent implements OnInit {
   }
 
   onColorChange(event: any) {
-    this.selectedColor = event.target.value;
-    console.log(this.selectedColor);
+    this.selectedColor = event.target.value;    
   }
 
   onAddClick() {

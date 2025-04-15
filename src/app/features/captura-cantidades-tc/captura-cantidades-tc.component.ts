@@ -16,29 +16,28 @@ interface RowData {
 @Component({
   selector: 'app-captura-cantidades-tc',
   standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './captura-cantidades-tc.component.html',
-  styleUrls: ['./captura-cantidades-tc.component.css'],
-  imports: [FormsModule, CommonModule]
+  styleUrls: ['./captura-cantidades-tc.component.css']  
 })
 
 export class CapturaCantidadesTcComponent implements OnInit {
   constructor(private sharedService: SharedService) { }
 
-  rows: RowData[] = [];
-
+  rows: RowData[] = [];  
   selectedColors: string[] = [];
-
+  selectedTallaje: string = '';
+  tallas: string[] =['CH','M','G','XG'];
   totalInputVal1: number = 0;
   totalInputVal2: number = 0;
   totalInputVal3: number = 0;
   totalInputVal4: number = 0;
   totalInputTot: number = 0;
-  
+   
   ngOnInit(): void {
     this.sharedService.currentColor.subscribe(color => {
       if (color) {
-        this.selectedColors.push(color);
-        console.log(this.selectedColors);
+        this.selectedColors.push(color);        
 
         this.rows.push({
           color: color,
@@ -47,9 +46,14 @@ export class CapturaCantidadesTcComponent implements OnInit {
           inputVal3: '0',
           inputVal4: '0',
           inputValTot: '0'
-        });
+        });        
+      }
+    });
 
-        console.log(this.rows);
+    this.sharedService.currentTallaje.subscribe(tallaje => {
+      if (tallaje) {
+        this.selectedTallaje = tallaje;
+        this.tallas = tallaje.split('-');
       }
     });
   }
@@ -65,7 +69,6 @@ export class CapturaCantidadesTcComponent implements OnInit {
     row.inputValTot = total.toString();
 
     this.calculateTotalInput();
-
   }
 
   calculateTotalInput() {
@@ -75,7 +78,6 @@ export class CapturaCantidadesTcComponent implements OnInit {
     this.totalInputVal4 = this.rows.reduce((sum, row) => sum + Number(row.inputVal4), 0);
     this.totalInputTot = this.rows.reduce((sum, row) => sum + Number(row.inputValTot), 0);
   }
-
 
  
 }

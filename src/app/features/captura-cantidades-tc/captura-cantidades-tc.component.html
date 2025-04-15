@@ -6,10 +6,9 @@
             <thead>
                 <tr>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">Color/Talla</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">CH</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">M</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">G</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">XG</th>
+                    <th *ngFor="let talla of tallas" class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+                        {{talla}}
+                    </th>                    
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">TOTAL</th>                    
                 </tr>
             </thead>
@@ -26,9 +25,7 @@
                         <td class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal3" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
                         <td class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal4" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
                         <td class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputValTot" disabled class="inline w-16 h-10 text-center"></td>
-                        
-                    </tr>                    
-                    
+                    </tr>
             </tbody>
             <tfoot>
                 <tr>
@@ -51,5 +48,5 @@
 </nav>
 </div>
 </div>
-    </div>
+</div>
 </div>

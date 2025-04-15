@@ -1,16 +1,43 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Prenota } from '../models/prenota.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
-  private colorSource = new BehaviorSubject<string>('');
-  currentColor = this.colorSource.asObservable();
-
   constructor() { }
+  
+  private colorSource = new BehaviorSubject<string>('');
+  private tallajeSource = new BehaviorSubject<string>('');
+  currentColor = this.colorSource.asObservable();
+  currentTallaje = this.tallajeSource.asObservable();
+
+  private prenotaSource = new BehaviorSubject<Prenota>({
+    Id: 0,    
+    Fecha: '',
+    Cajas: '',
+    Estilo: '',
+    Estilo2: '',
+    Marca: 0,
+    Familia: 0,
+    Subfamilia: 0,
+    Tallaje: '',
+    Descrip: '',
+    Status: ''
+  });
+  
+  currentPrenota = this.prenotaSource.asObservable(); 
 
   changeColor(color: string) {
     this.colorSource.next(color);
+  }
+
+  changeTallaje(tallaje: string) {
+    this.tallajeSource.next(tallaje);
+  }
+
+  updatePrenota(prenota: Prenota): void {
+    this.prenotaSource.next(prenota);
   }
 }
