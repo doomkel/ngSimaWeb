@@ -10,6 +10,11 @@ interface RowData {
   inputVal2: string;
   inputVal3: string;
   inputVal4: string;
+  inputVal5: string;
+  inputVal6: string;
+  inputVal7: string;
+  inputVal8: string;
+  inputVal9: string;
   inputValTot: string;
 }
 
@@ -32,6 +37,11 @@ export class CapturaCantidadesTcComponent implements OnInit {
   totalInputVal2: number = 0;
   totalInputVal3: number = 0;
   totalInputVal4: number = 0;
+  totalInputVal5: number = 0;
+  totalInputVal6: number = 0;
+  totalInputVal7: number = 0;
+  totalInputVal8: number = 0;
+  totalInputVal9: number = 0;
   totalInputTot: number = 0;
    
   ngOnInit(): void {
@@ -45,6 +55,11 @@ export class CapturaCantidadesTcComponent implements OnInit {
           inputVal2: '0',
           inputVal3: '0',
           inputVal4: '0',
+          inputVal5: '0',
+          inputVal6: '0',
+          inputVal7: '0',
+          inputVal8: '0',
+          inputVal9: '0',
           inputValTot: '0'
         });        
       }
@@ -64,8 +79,13 @@ export class CapturaCantidadesTcComponent implements OnInit {
     const val2 = Number(row.inputVal2);
     const val3 = Number(row.inputVal3);
     const val4 = Number(row.inputVal4);
+    const val5 = Number(row.inputVal5);
+    const val6 = Number(row.inputVal6);
+    const val7 = Number(row.inputVal7);
+    const val8 = Number(row.inputVal8);
+    const val9 = Number(row.inputVal9);
 
-    const total = val1 + val2 + val3 + val4;
+    const total = val1 + val2 + val3 + val4 + val5 + val6 + val7 + val8 + val9;
     row.inputValTot = total.toString();
 
     this.calculateTotalInput();
@@ -76,6 +96,11 @@ export class CapturaCantidadesTcComponent implements OnInit {
     this.totalInputVal2 = this.rows.reduce((sum, row) => sum + Number(row.inputVal2), 0);
     this.totalInputVal3 = this.rows.reduce((sum, row) => sum + Number(row.inputVal3), 0);
     this.totalInputVal4 = this.rows.reduce((sum, row) => sum + Number(row.inputVal4), 0);
+    this.totalInputVal5 = this.rows.reduce((sum, row) => sum + Number(row.inputVal5), 0);
+    this.totalInputVal6 = this.rows.reduce((sum, row) => sum + Number(row.inputVal6), 0);
+    this.totalInputVal7 = this.rows.reduce((sum, row) => sum + Number(row.inputVal7), 0);
+    this.totalInputVal8 = this.rows.reduce((sum, row) => sum + Number(row.inputVal8), 0);
+    this.totalInputVal9 = this.rows.reduce((sum, row) => sum + Number(row.inputVal9), 0);
     this.totalInputTot = this.rows.reduce((sum, row) => sum + Number(row.inputValTot), 0);
   }
 

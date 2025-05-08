@@ -20,20 +20,30 @@
                             <span class="relative text-xs">{{row.color}}</span>
                         </span>
                         </td>                        
-                        <td class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal1" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
-                        <td class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal2" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
-                        <td class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal3" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
-                        <td class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal4" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="1 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal1" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="2 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal2" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="3 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal3" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="4 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal4" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="5 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal5" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="6 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal6" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="7 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal7" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="8 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal8" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
+                        <td *ngIf="9 <= tallas.length" class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputVal9" class="inline w-16 h-10 text-center" (keydown)="onKey(row)"></td>
                         <td class="border-solid border-2 border-black-900 text-center"><input [(ngModel)]="row.inputValTot" disabled class="inline w-16 h-10 text-center"></td>
                     </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">Total</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal1}}</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal2}}</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal3}}</th>
-                    <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal4}}</th>
+                    <th *ngIf="1 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal1}}</th>
+                    <th *ngIf="2 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal2}}</th>
+                    <th *ngIf="3 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal3}}</th>
+                    <th *ngIf="4 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal4}}</th>
+                    <th *ngIf="5 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal5}}</th>
+                    <th *ngIf="6 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal6}}</th>
+                    <th *ngIf="7 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal7}}</th>
+                    <th *ngIf="8 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal8}}</th>
+                    <th *ngIf="9 <= tallas.length" class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputVal9}}</th>
                     <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider">{{totalInputTot}}</th>                    
                 </tr>
             </tfoot>
