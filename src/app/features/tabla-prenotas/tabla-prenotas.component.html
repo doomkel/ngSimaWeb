@@ -1,6 +1,6 @@
 <!-- component -->
 <div class="overflow-x-auto">
-    <div class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
+    <div class="w-full flex justify-center font-sans">
         <div class="w-full lg:w-5/6">
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">
@@ -8,137 +8,53 @@
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">PreNota</th>
                             <th class="py-3 px-6 text-left">Fecha</th>
-                            <th class="py-3 px-6 text-left">Piezas</th>
-                            <th class="py-3 px-6 text-left">Cajas</th>                            
+                            <th class="py-3 px-6 text-left">Cajas</th>
+                            <th class="py-3 px-6 text-left">Estilo</th>                            
                             <th class="py-3 px-6 text-left">Seleccion</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <!-- Loading state -->
+                        <tr *ngIf="loading" class="border-b border-gray-200">
+                            <td colspan="5" class="py-4 px-6 text-center text-gray-500">Cargando…</td>
+                        </tr>
+
+                        <!-- Error state -->
+                        <tr *ngIf="!loading && error" class="border-b border-gray-200">
+                            <td colspan="5" class="py-4 px-6 text-center text-red-600">{{ error }}</td>
+                        </tr>
+
+                        <!-- Empty state -->
+                        <tr *ngIf="!loading && !error && prenotas.length === 0" class="border-b border-gray-200">
+                            <td colspan="5" class="py-4 px-6 text-center text-gray-500">No hay prenotas</td>
+                        </tr>
+
+                        <!-- Data rows -->
+                        <tr *ngFor="let p of prenotas; let i = index" class="border-b border-gray-200 hover:bg-gray-100" [ngClass]="{ 'bg-gray-50': i % 2 === 1 }">
                             <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <div class="flex items-center">                                    
-                                    <span class="font-medium">121824</span>
+                                <div class="flex items-center">
+                                    <span class="font-medium">{{ p.Id }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>30/11/2024</span>
+                                <div class="flex items-center">
+                                    <span>{{ p.Fecha | date:'yyyy-MM-dd' }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>200</span>
+                                <div class="flex items-center">
+                                    <span>{{ p.Cajas }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>2</span>
+                                <div class="flex items-center">
+                                    <span>{{ p.Estilo }}</span>
                                 </div>
-                            </td>                            
+                            </td>
                             <td class="py-3 px-6 text-left">
                                 <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
                             </td>
                         </tr>
-                        <tr class="border-b border-gray-200 bg-gray-50 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span class="font-medium">121830</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>29/11/2024</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>300</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>5</span>
-                                </div>
-                            </td>                            
-                            <td class="py-3 px-6 text-left">                                
-                                <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span class="font-medium">121831</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>05/12/2024</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>500</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-left">                                    
-                                    <span>5</span>
-                                </div>
-                            </td>                            
-                            <td class="py-3 px-6 text-left">                                
-                                <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200 bg-gray-50 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span class="font-medium">121840</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>05/12/2024</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>100</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>1</span>
-                                </div>
-                            </td>                            
-                            <td class="py-3 px-6 text-left">
-                                <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span class="font-medium">121843</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>05/12/2024</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>200</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
-                                    <span>4</span>
-                                </div>
-                            </td>                            
-                            <td class="py-3 px-6 text-left">
-                                <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
-                            </td>
-                        </tr>                        
                     </tbody>
                 </table>
             </div>

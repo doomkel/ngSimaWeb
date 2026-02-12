@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SharedService } from 'src/app/services/shared.service';
 import { PrenotaService } from 'src/app/services/prenota.service';
 import { Prenota } from 'src/app/models/prenota.model';
+import { ImagenService } from 'src/app/services/imagen.service';
+import { Imagen } from 'src/app/models/imagen.model';
 import { MessageModalComponent } from 'src/app/shared/message-modal/message-modal.component';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { ThisReceiver } from '@angular/compiler';
 import { format } from 'date-fns';
 
 @Component({
@@ -19,14 +19,13 @@ import { format } from 'date-fns';
 )
 
 export class BotonAprobarNotaComponent implements OnInit {
-  constructor(private sharedService:SharedService, private prenotaService:PrenotaService, private http:HttpClient) {}
-  private url = "https://localhost:7100/api/prenotas";
-  
+  constructor(private sharedService:SharedService, private prenotaService:PrenotaService, private imagenService:ImagenService, private http:HttpClient) {}
+    
   @Input() labelTipo: string = 'Prenota:';
   @Input() labelProceso: string = 'GUARDAR';
   nextId: number = 0;
   message: string = '';
-  isModalVisible = false;
+   isModalVisible = false;
 
   prenota: Prenota = {
     Id: 0,    
@@ -42,6 +41,12 @@ export class BotonAprobarNotaComponent implements OnInit {
     Status: ''
   };
 
+  imagen: Imagen = {
+    id: 0,
+    Estilo: '',
+    Imagen: new ArrayBuffer(0)
+  }
+
   ngOnInit(): void {
     this.prenotaService.getNextId().subscribe(
       (Data: number) => {
@@ -55,6 +60,10 @@ export class BotonAprobarNotaComponent implements OnInit {
     this.sharedService.currentPrenota.subscribe((prenota) => {
       this.prenota = prenota;
     });
+
+    this.sharedService.currentImagen.subscribe((imagen) => {
+      this.imagen = imagen;
+    });
   }
 
   onClickGuardar(event: Event): void {
@@ -64,21 +73,34 @@ export class BotonAprobarNotaComponent implements OnInit {
     this.prenota.Status = 'Capturada';
     this.prenota.Fecha = formattedDate;
     this.prenota.Id = this.nextId ;
+    // Ensure image Estilo matches current prenota Estilo for server validation
+    this.imagen.Estilo = this.prenota.Estilo;
 
-    this.createPrenota(this.prenota).subscribe(
-      (response) => {
-        this.message = 'Nota ' + this.nextId + ' creada correctamente';
-        this.isModalVisible = true;
-      },
+    this.prenotaService.createPrenota(this.prenota).subscribe(
+      //(response) => {
+      //  this.message = 'Nota ' + this.nextId + ' creada correctamente';
+      //  this.isModalVisible = true;
+      //},
       (error) => {
-        this.message = 'Error: ' + error;
+        this.message = 'Error: ' + JSON.stringify(error);
         this.isModalVisible = true;
       }
     );
-  }
 
-  createPrenota(prenota: Prenota): Observable<Prenota> {
-    return this.http.post<Prenota>(this.url, prenota);
+    this.imagenService.saveImagen(this.imagen).subscribe(
+      //(response) => {
+      //  this.message = 'Imagen ' + this.imagen.Estilo + ' guardada correctamente';
+      //  this.isModalVisible = true;
+      //},
+      (error) => {
+        console.log("Estilo:" + this.imagen.Estilo);
+        console.log("Imagen:" + this.imagen.Imagen);
+        this.message = 'Error: ' + JSON.stringify(error);
+        this.isModalVisible = true;
+      }
+    );
+
+    
   }
 
   onModalClose(): void {

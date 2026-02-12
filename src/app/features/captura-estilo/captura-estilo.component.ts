@@ -11,6 +11,8 @@ import { SubFamilia } from 'src/app/models/subfamilia.model';
 import { ClaseService } from 'src/app/services/clase.service';
 import { Clase } from 'src/app/models/clase.model';
 import { Prenota } from 'src/app/models/prenota.model';
+import { Imagen } from 'src/app/models/imagen.model';
+
 
 
 @Component({
@@ -26,6 +28,11 @@ export class CapturaEstiloComponent {
   subfamilias: SubFamilia[] = [];
   clases: Clase[] = [];
   selectedImage: string | ArrayBuffer | null = null;
+  imagen: Imagen = {
+    id: 0,
+    Estilo: '',
+    Imagen: new ArrayBuffer(0)
+  }
   prenota: Prenota = {
     Id: 0,    
     Fecha: '',
@@ -144,12 +151,27 @@ export class CapturaEstiloComponent {
       const reader = new FileReader();
       reader.onload = (e) => {
         if (e.target) {
-          this.selectedImage = e.target.result;          
+          this.selectedImage = e.target.result;
+          if (this.selectedImage instanceof ArrayBuffer) {
+            this.imagen.Imagen = this.selectedImage;
+          } else if (typeof this.selectedImage === 'string') {
+            // Convert base64 string to ArrayBuffer if needed
+            const base64 = this.selectedImage.split(',')[1];
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+              bytes[i] = binaryString.charCodeAt(i);
+            }
+            this.imagen.Imagen = bytes.buffer;
+          }          
+          // Ensure Estilo is synchronized for image upload
+          this.imagen.Estilo = this.prenota.Estilo;
+          this.sharedService.updateImage(this.imagen);
         }
       };
       reader.readAsDataURL(file);
-    }
-    
+    }    
   }
 
   onDragOver(event: DragEvent): void {
@@ -163,6 +185,21 @@ export class CapturaEstiloComponent {
     const file = event.dataTransfer?.files[0];
     if (file) {
       this.onFileChange({ target: { files: [file] } });
+      if (this.selectedImage instanceof ArrayBuffer) {
+        this.imagen.Imagen = this.selectedImage;
+      } else if (typeof this.selectedImage === 'string') {
+        // Convert base64 string to ArrayBuffer if needed
+        const base64 = this.selectedImage.split(',')[1];
+        const binaryString = window.atob(base64);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+        this.imagen.Imagen = bytes.buffer;
+      }
+      this.imagen.Estilo = this.prenota.Estilo;
+      this.sharedService.updateImage(this.imagen);
     }
   }
 

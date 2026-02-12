@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Prenota } from '../models/prenota.model';
+import { Imagen } from '../models/imagen.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,16 @@ export class SharedService {
     Descrip: '',
     Status: ''
   });
+
+  private imagenSource = new BehaviorSubject<Imagen>({
+    id: 0,
+    Estilo: '',
+    Imagen: new ArrayBuffer(0)
+  });
   
   currentPrenota = this.prenotaSource.asObservable(); 
+
+  currentImagen = this.imagenSource.asObservable();
 
   changeColor(color: string) {
     this.colorSource.next(color);
@@ -39,5 +48,9 @@ export class SharedService {
 
   updatePrenota(prenota: Prenota): void {
     this.prenotaSource.next(prenota);
+  }
+
+  updateImage(imagen: Imagen): void {
+    this.imagenSource.next(imagen);
   }
 }

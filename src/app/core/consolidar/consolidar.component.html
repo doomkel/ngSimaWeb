@@ -1,11 +1,9 @@
 <div class="bg-slate-50">
     <app-sidebar></app-sidebar>
-    <div class="grid grid-cols-1 sm:grid-cols-1">
-        <div class="p-4 xl:ml-80"> 
-            <app-tabla-prenotas></app-tabla-prenotas>                
+    <div class="p-4 xl:ml-80">
+        <app-tabla-prenotas></app-tabla-prenotas>
+        <div class="mt-4 flex justify-center">
+            <app-boton-aprobar-nota [labelTipo]="'Nota:'" [labelProceso]="'CONSOLIDAR'"></app-boton-aprobar-nota>
         </div>
-        <div class="mx-60 absolute bottom-80 left-80"> 
-            <app-boton-aprobar-nota [labelTipo]="'Nota:'" [labelProceso]="'CONSOLIDAR'"></app-boton-aprobar-nota>            
-        </div>    
     </div>
-  </div>
+</div>
