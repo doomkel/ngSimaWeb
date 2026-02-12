@@ -6,6 +6,7 @@ import { SharedService } from 'src/app/services/shared.service';
 
 interface RowData {
   color: string;
+  tailwindColor: string;
   inputVal1: string;
   inputVal2: string;
   inputVal3: string;
@@ -45,12 +46,13 @@ export class CapturaCantidadesTcComponent implements OnInit {
   totalInputTot: number = 0;
    
   ngOnInit(): void {
-    this.sharedService.currentColor.subscribe(color => {
-      if (color) {
-        this.selectedColors.push(color);        
+    this.sharedService.currentColor.subscribe(selectedColor => {
+      if (selectedColor) {
+        this.selectedColors.push(selectedColor.color);
 
         this.rows.push({
-          color: color,
+          color: selectedColor.color,
+          tailwindColor: selectedColor.tailwindColor,
           inputVal1: '0',
           inputVal2: '0',
           inputVal3: '0',
@@ -102,6 +104,16 @@ export class CapturaCantidadesTcComponent implements OnInit {
     this.totalInputVal8 = this.rows.reduce((sum, row) => sum + Number(row.inputVal8), 0);
     this.totalInputVal9 = this.rows.reduce((sum, row) => sum + Number(row.inputVal9), 0);
     this.totalInputTot = this.rows.reduce((sum, row) => sum + Number(row.inputValTot), 0);
+  }
+
+  getColorBadgeClass(row: RowData): string {
+    if (!row.tailwindColor) {
+      return 'bg-red-500';
+    }
+
+    return row.tailwindColor.startsWith('bg-')
+      ? row.tailwindColor
+      : `bg-${row.tailwindColor}`;
   }
 
  

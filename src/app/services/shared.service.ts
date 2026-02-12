@@ -3,13 +3,18 @@ import { BehaviorSubject } from 'rxjs';
 import { Prenota } from '../models/prenota.model';
 import { Imagen } from '../models/imagen.model';
 
+export interface SelectedColor {
+  color: string;
+  tailwindColor: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
   constructor() { }
   
-  private colorSource = new BehaviorSubject<string>('');
+  private colorSource = new BehaviorSubject<SelectedColor | null>(null);
   private tallajeSource = new BehaviorSubject<string>('');
   currentColor = this.colorSource.asObservable();
   currentTallaje = this.tallajeSource.asObservable();
@@ -38,7 +43,7 @@ export class SharedService {
 
   currentImagen = this.imagenSource.asObservable();
 
-  changeColor(color: string) {
+  changeColor(color: SelectedColor) {
     this.colorSource.next(color);
   }
 

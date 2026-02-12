@@ -37,6 +37,15 @@ export class CapturaColoresComponent implements OnInit {
   }
 
   onAddClick() {
-    this.sharedService.changeColor(this.selectedColor);
+    const selectedColorData = this.colores.find(color => color.color === this.selectedColor);
+
+    if (!selectedColorData) {
+      return;
+    }
+
+    this.sharedService.changeColor({
+      color: selectedColorData.color,
+      tailwindColor: selectedColorData.tailwindColor
+    });
   }
 }
